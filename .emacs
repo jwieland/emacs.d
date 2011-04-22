@@ -1,15 +1,19 @@
-(setq load-path (cons "~/.emacs.d/" load-path))
-(load-library "p4")
+(setq load-path (append (list (expand-file-name "~/.emacs.d")) load-path))
+;;(load-library "p4")
 
+(setq tramp-default-method "ssh")
 
-(autoload 'js-mode "js" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+;;(autoload 'js-mode "js" nil t)
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 
-(load "~/.emacs.d/nxhtml/autostart.el")
+;;(load "~/.emacs.d/nxhtml-2.08-100425/autostart.el")
+
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
 
 (require 'ido)
 (ido-mode t)
-
 
 (mapc
  (lambda (pair)
