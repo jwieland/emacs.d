@@ -1,6 +1,10 @@
 (setq load-path (cons "~/.emacs.d/" load-path))
 (load-library "p4")
 
+(setq c-basic-offset 2)
+(setq tab-width 4)
+(setq indent-tabs-mode nil)
+
 
 (autoload 'js-mode "js" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
@@ -51,3 +55,29 @@ vg" "rss") t) "\\'")
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+
+;; If you haven't added ~/.emacs.d/site-lisp to your load-path, do it with this.
+(add-to-list 'load-path "~/.emacs.d/emacs-flymake/")
+
+;; Require flymake.
+(require 'flymake)
+;; If you're a TTY emacs user, flymake-cursor is a must-have.
+;; Grab it with apt-get or ports or whatever your OS package manager is.
+(require 'flymake-cursor)
+
+;; Static analysis can be slow, so only run flymake if I've not been typing for 5 seconds.
+;; It will still run on save or hitting return.
+(setq flymake-no-changes-timeout 5)
+
+;; Disable in-place checking, and tell it to use ~/.emacs.d/tmp/ for the temp files.
+(setq temporary-file-directory "~/.emacs.d/tmp/")
+(setq flymake-run-in-place nil)
+
+
+
+;; flymake-perlcritic stuff
+(setq flymake-perlcritic-severity 5)
+;; If flymake_perlcritic isn't in your $PATH you'll need to give the full path here
+(setq flymake-perlcritic-command "/home/jwieland/.emacs.d/emacs-flymake-perlcritic/bin/flymake_perlcritic")
+(require 'flymake-perlcritic)
